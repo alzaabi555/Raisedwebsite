@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>راصد PRO | الدليل الشامل</title>
+    <title>راصد PRO | الرفيق الرقمي للمعلم</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,8 +21,11 @@
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; scroll-behavior: smooth; outline: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; outline: none; }
         
+        /* تفعيل التمرير الناعم */
+        html { scroll-behavior: smooth; }
+
         body { background-color: var(--bg-dark); color: var(--text-light); line-height: 1.8; overflow-x: hidden; }
 
         /* --- Header --- */
@@ -34,8 +37,12 @@
         }
         .logo { font-size: 1.5rem; font-weight: 900; color: var(--text-light); display: flex; align-items: center; gap: 10px; }
         .logo i { color: var(--accent); }
+        .nav-links { display: flex; gap: 20px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-gray); font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+
         .btn-gold {
-            background: linear-gradient(135deg, #b45309, #d97706); color: white; padding: 8px 25px;
+            background: linear-gradient(135deg, #b45309, #d97706); color: white !important; padding: 8px 25px;
             border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 0.9rem;
             box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3); transition: 0.3s;
         }
@@ -50,7 +57,7 @@
         .hero span { color: var(--accent); }
         .hero p { color: var(--text-gray); font-size: 1.2rem; max-width: 800px; margin: 0 auto 40px; }
 
-        /* --- Detailed Features (The Core) --- */
+        /* --- Detailed Features --- */
         .details-section { padding: 50px 5%; max-width: 1300px; margin: 0 auto; }
         
         .feature-row {
@@ -59,14 +66,8 @@
             border: 1px solid var(--glass-border); position: relative; overflow: hidden;
             transition: 0.4s;
         }
-        
         .feature-row:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        
-        /* تأثير زخرفي */
-        .feature-row::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 5px; height: 100%;
-            background: var(--accent);
-        }
+        .feature-row::before { content: ''; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: var(--accent); }
 
         .feature-content { flex: 1; }
         .feature-icon {
@@ -93,7 +94,6 @@
         .feature-image img { width: 100%; height: auto; display: block; transition: 0.5s; }
         .feature-row:hover .feature-image img { transform: scale(1.03); }
 
-        /* تبديل الاتجاه للصفوف الزوجية */
         .feature-row:nth-child(even) { flex-direction: row-reverse; }
         .feature-row:nth-child(even)::before { left: auto; right: 0; }
 
@@ -105,18 +105,17 @@
             display: flex; align-items: center; gap: 20px; padding: 20px 40px;
             background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
             border-radius: 20px; text-decoration: none; width: 350px; transition: 0.3s;
+            cursor: pointer;
         }
         .dl-btn:hover { background: var(--accent); border-color: var(--accent); }
         .dl-btn:hover * { color: white !important; }
         
         .dl-icon { font-size: 2.5rem; color: var(--text-gray); }
-        .dl-text h4 { color: var(--text-light); font-size: 1.2rem; }
-        .dl-text span { color: var(--text-gray); font-size: 0.9rem; }
+        .dl-text h4 { color: var(--text-light); font-size: 1.2rem; margin-bottom: 5px; }
+        .dl-text span { color: var(--text-gray); font-size: 0.9rem; display: block; }
 
         /* --- Footer --- */
-        footer {
-            background: #000; padding: 60px 20px; text-align: center; border-top: 1px solid var(--glass-border);
-        }
+        footer { background: #000; padding: 60px 20px; text-align: center; border-top: 1px solid var(--glass-border); }
         .dev-name { font-size: 1.5rem; color: var(--accent); margin-bottom: 15px; display: block; font-weight: 900; }
         .contact {
             display: inline-flex; align-items: center; gap: 10px; color: var(--text-light);
@@ -130,6 +129,7 @@
             .feature-image { max-width: 100%; width: 100%; }
             .feature-list { grid-template-columns: 1fr; }
             .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -137,6 +137,10 @@
 
     <nav>
         <div class="logo"><i class="fa-solid fa-layer-group"></i> راصد PRO</div>
+        <ul class="nav-links">
+            <li><a href="#features">المميزات</a></li>
+            <li><a href="#download">التحميل</a></li>
+        </ul>
         <a href="#download" class="btn-gold">تحميل النسخة</a>
     </nav>
 
@@ -146,7 +150,7 @@
         <p>نستعرض هنا بالتفصيل كل زاوية في التطبيق، ليكون مرجعك الدائم لإدارة فصلية احترافية.</p>
     </header>
 
-    <div class="details-section">
+    <div id="features" class="details-section">
 
         <div class="feature-row">
             <div class="feature-content">
@@ -158,7 +162,7 @@
                     <li><i class="fa-solid fa-check"></i> <strong>جدول الحصص:</strong> يعرض جدول اليوم تلقائياً مع تحديد الحصة الحالية.</li>
                     <li><i class="fa-solid fa-check"></i> <strong>الجرس الذكي:</strong> زر لتفعيل تنبيهات صوتية لبداية ونهاية الحصة.</li>
                     <li><i class="fa-solid fa-check"></i> <strong>التحضير السريع:</strong> زر ينقلك فوراً لكشف غياب الحصة الحالية.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>استيراد الجدول:</strong> إمكانية رفع الجدول من ملف Excel أو تعديله يدوياً.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>استيراد الجدول:</strong> إمكانية رفع الجدول من ملف Excel.</li>
                 </ul>
             </div>
             <div class="feature-image">
@@ -172,16 +176,15 @@
                 <h3>2. إدارة الفصل والطلاب</h3>
                 <p>الشاشة التي تقضي فيها معظم وقتك، مليئة بأدوات التفاعل لضبط الفصل وخلق جو حماسي.</p>
                 <ul class="feature-list">
-                    <li><i class="fa-solid fa-check"></i> <strong>المؤقت (Timer):</strong> لضبط وقت الأنشطة مع صوت تكتكة في آخر 10 ثوان.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>المؤقت (Timer):</strong> لضبط وقت الأنشطة مع صوت تكتكة.</li>
                     <li><i class="fa-solid fa-check"></i> <strong>القرعة (Dice):</strong> اختيار عشوائي عادل للطلاب الحاضرين فقط.</li>
                     <li><i class="fa-solid fa-check"></i> <strong>تعزيز إيجابي:</strong> منح نقاط (مشاركة، واجب..) بلمسة واحدة.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>تنبيه سلوكي:</strong> رصد المخالفات (إزعاج، نسيان..) بسهولة.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>زر واتساب الذكي:</strong> إرسال تقرير سلوك فوري لولي الأمر بضغطة زر.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>إضافة الطلاب:</strong> يدوياً أو استيراد قوائم كاملة من Excel.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>تنبيه سلوكي:</strong> رصد المخالفات بسهولة.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>زر واتساب الذكي:</strong> إرسال تقرير سلوك فوري لولي الأمر.</li>
                 </ul>
             </div>
             <div class="feature-image">
-                <img src="students_screen.jpg" onerror="this.src='https://placehold.co/600x400/0f172a/ca8a04?text=Class+Management'" alt="الطلاب">
+                <img src="students_screen.jpg" onerror="this.src='https://placehold.co/600x400/0f172a/ca8a04?text=Students'" alt="الطلاب">
             </div>
         </div>
 
@@ -189,16 +192,15 @@
             <div class="feature-content">
                 <div class="feature-icon"><i class="fa-solid fa-clipboard-user"></i></div>
                 <h3>3. رصد الحضور والغياب</h3>
-                <p>نظام دقيق لضبط الانضباط المدرسي بدقة عالية، يغنيك عن السجلات الورقية.</p>
+                <p>نظام دقيق لضبط الانضباط المدرسي بدقة عالية.</p>
                 <ul class="feature-list">
-                    <li><i class="fa-solid fa-check"></i> <strong>الحالات الدقيقة:</strong> (حاضر ✅، غائب ❌، متأخر ⏰، هروب 🏃‍♂️).</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>تحضير الكل:</strong> زر واحد لجعل الجميع "حضور" ثم تعديل الغائبين.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>تقرير واتساب:</strong> زر بجوار كل طالب يرسل لولي الأمر تاريخ ووقت الغياب بدقة.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>الفلترة:</strong> عرض الغائبين فقط أو المتأخرين بلمسة واحدة.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>الحالات الدقيقة:</strong> (حاضر، غائب، متأخر، هروب).</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>تحضير الكل:</strong> زر واحد لجعل الجميع "حضور".</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>تقرير واتساب:</strong> إرسال تفاصيل الغياب لولي الأمر بضغطة زر.</li>
                 </ul>
             </div>
             <div class="feature-image">
-                <img src="attendance_screen.jpg" onerror="this.src='https://placehold.co/600x400/0f172a/ca8a04?text=Attendance+System'" alt="الغياب">
+                <img src="attendance_screen.jpg" onerror="this.src='https://placehold.co/600x400/0f172a/ca8a04?text=Attendance'" alt="الغياب">
             </div>
         </div>
 
@@ -206,30 +208,28 @@
             <div class="feature-content">
                 <div class="feature-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                 <h3>4. سجل الدرجات الإلكتروني</h3>
-                <p>دفتر درجاتك المتطور. ارصد الدرجات وسيقوم النظام بكل الحسابات المعقدة نيابة عنك.</p>
+                <p>دفتر درجاتك المتطور مع حسابات تلقائية.</p>
                 <ul class="feature-list">
-                    <li><i class="fa-solid fa-check"></i> <strong>أدوات التقويم:</strong> إنشاء أدوات مرنة (اختبار، واجب، مشروع..).</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>الحساب التلقائي:</strong> جمع التقويم المستمر + النهائي فورياً.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>نظام الرموز:</strong> تحويل الدرجة الرقمية لرمز (أ، ب، ج..) تلقائياً.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>الرصد الجماعي:</strong> ميزة "العصا السحرية" لرصد درجة موحدة للكل.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>تكامل Excel:</strong> استيراد وتصدير الكشوفات للإدارة.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>أدوات التقويم:</strong> إنشاء أدوات مرنة (اختبار، واجب..).</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>الحساب التلقائي:</strong> جمع التقويم المستمر + النهائي.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>نظام الرموز:</strong> تحويل الدرجة لرمز (أ، ب..) تلقائياً.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>الرصد الجماعي:</strong> رصد درجة موحدة للكل بلمسة.</li>
                 </ul>
             </div>
             <div class="feature-image">
-                <img src="grades_screen.jpg" onerror="this.src='https://placehold.co/600x400/0f172a/ca8a04?text=Gradebook'" alt="الدرجات">
+                <img src="grades_screen.jpg" onerror="this.src='https://placehold.co/600x400/0f172a/ca8a04?text=Grades'" alt="الدرجات">
             </div>
         </div>
 
         <div class="feature-row">
             <div class="feature-content">
                 <div class="feature-icon"><i class="fa-solid fa-trophy"></i></div>
-                <h3>5. فرسان الشهر (لوحة الشرف)</h3>
-                <p>ساحة التنافس الشريف. هنا يظهر المتميزون بناءً على نقاط السلوك التي جمعوها.</p>
+                <h3>5. فرسان الشهر</h3>
+                <p>ساحة التنافس الشريف لتكريم المتميزين.</p>
                 <ul class="feature-list">
-                    <li><i class="fa-solid fa-check"></i> <strong>الترتيب التلقائي:</strong> النظام يرتب الطلاب حسب مجموع النقاط شهرياً.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>منصة التتويج:</strong> عرض مميز للمراكز الثلاثة الأولى (🥇🥈🥉).</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>طباعة الشهادة:</strong> زر لإنشاء شهادة تقدير رسمية فورية للفائز.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>توثيق رسمي:</strong> الشهادة تحتوي تلقائياً على اسم المدير والمعلم والشعار.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>الترتيب التلقائي:</strong> حسب مجموع نقاط السلوك.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>منصة التتويج:</strong> عرض مميز للمراكز الثلاثة الأولى.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>طباعة الشهادة:</strong> إنشاء شهادة تقدير رسمية فورية.</li>
                 </ul>
             </div>
             <div class="feature-image">
@@ -240,18 +240,17 @@
         <div class="feature-row">
             <div class="feature-content">
                 <div class="feature-icon"><i class="fa-solid fa-print"></i></div>
-                <h3>6. مركز التقارير (المطبعة الذكية)</h3>
-                <p>أرشيفك الإداري الشامل، يغنيك عن الأوراق ويصدر لك وثائق رسمية جاهزة للطباعة.</p>
+                <h3>6. مركز التقارير</h3>
+                <p>المطبعة الذكية لإصدار الوثائق الرسمية.</p>
                 <ul class="feature-list">
-                    <li><i class="fa-solid fa-check"></i> <strong>ملف الطالب الشامل:</strong> تقرير "سيرة ذاتية" (غياب، سلوك، درجات).</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>طباعة الفصل:</strong> طباعة تقارير جميع طلاب الفصل دفعة واحدة.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>شهادات التقدير:</strong> تكريم جماعي للفصل بعنوان ونص مخصص.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>استدعاء ولي أمر:</strong> خطاب رسمي ببيانات الطالب وسبب الاستدعاء.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>كشوفات الدرجات:</strong> كشف كلاسيكي جاهز للتسليم للإدارة.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>ملف الطالب الشامل:</strong> تقرير شامل (سلوك ودرجات).</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>شهادات التقدير:</strong> تكريم جماعي للفصل.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>استدعاء ولي أمر:</strong> خطاب رسمي جاهز للطباعة.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>كشوفات الدرجات:</strong> كشف كلاسيكي جاهز للتسليم.</li>
                 </ul>
             </div>
             <div class="feature-image">
-                <img src="reports_screen.jpg" onerror="this.src='https://placehold.co/600x400/0f172a/ca8a04?text=Reports+Center'" alt="التقارير">
+                <img src="reports_screen.jpg" onerror="this.src='https://placehold.co/600x400/0f172a/ca8a04?text=Reports'" alt="التقارير">
             </div>
         </div>
 
@@ -259,12 +258,11 @@
             <div class="feature-content">
                 <div class="feature-icon"><i class="fa-solid fa-gears"></i></div>
                 <h3>7. الإعدادات والنسخ الاحتياطي</h3>
-                <p>تحكم كامل في بياناتك وبيئة التطبيق لضمان الأمان والمرونة.</p>
+                <p>تحكم كامل في بياناتك وبيئة التطبيق.</p>
                 <ul class="feature-list">
-                    <li><i class="fa-solid fa-check"></i> <strong>النسخ الاحتياطي:</strong> حفظ نسخة كاملة من قاعدة البيانات واستعادتها.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>تخصيص الهوية:</strong> رفع شعار الوزارة وختم المدرسة للتقارير.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>الفصل الدراسي:</strong> التبديل بين الفصل الأول والثاني بضغطة زر.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>نوع المدرسة:</strong> تحديد (بنين / بنات) لضبط الأيقونات تلقائياً.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>النسخ الاحتياطي:</strong> حفظ واستعادة البيانات.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>تخصيص الهوية:</strong> رفع شعار الوزارة وختم المدرسة.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>نوع المدرسة:</strong> ضبط الأيقونات (بنين / بنات).</li>
                 </ul>
             </div>
             <div class="feature-image">
@@ -277,20 +275,23 @@
     <section id="download" class="download-section">
         <h2 style="font-size: 2.5rem; margin-bottom: 30px;">ابدأ التجربة الآن</h2>
         <div class="download-grid">
-            <a href="#" class="dl-btn" target="_blank">
+            
+            <a href="https://github.com/alzaabi555/-Build-iOS/releases/download/v3.8.4/StudentManager-Android.apk" class="dl-btn" target="_blank">
                 <i class="fa-brands fa-android dl-icon" style="color: #3DDC84;"></i>
                 <div class="dl-text">
                     <h4>نسخة الأندرويد</h4>
-                    <span>https://github.com/alzaabi555/-Build-iOS/releases/download/v3.8.4/StudentManager-Android.apk</span>
+                    <span>تحميل ملف APK</span>
                 </div>
             </a>
-            <a href="#" class="dl-btn" target="_blank">
+            
+            <a href="https://github.com/alzaabi555/-Build-iOS/releases/download/v3.8.4/student-manager-app-setup-3.8.4.exe" class="dl-btn" target="_blank">
                 <i class="fa-brands fa-windows dl-icon" style="color: #0078D6;"></i>
                 <div class="dl-text">
                     <h4>نسخة الويندوز</h4>
-                    <span>https://github.com/alzaabi555/-Build-iOS/releases/download/v3.8.4/student-manager-app-setup-3.8.4.exe</span>
+                    <span>تحميل ملف EXE</span>
                 </div>
             </a>
+
         </div>
     </section>
 
@@ -302,7 +303,7 @@
             <i class="fa-brands fa-whatsapp"></i> الدعم الفني: 98344555
         </a>
         
-        <p style="margin-top: 40px; font-size: 0.8rem; opacity: 0.5;">جميع الحقوق محفوظة © 2024 تطبيق راصد PRO</p>
+        <p style="margin-top: 40px; font-size: 0.8rem; opacity: 0.5;">جميع الحقوق محفوظة © 2026 تطبيق راصد PRO</p>
     </footer>
 
 </body>
