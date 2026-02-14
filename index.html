@@ -1,315 +1,1058 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html dir="rtl" lang="ar" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>راصد PRO | الرفيق الرقمي للمعلم</title>
-    
-    <link rel="icon" href="icon.jpg" type="image/jpeg">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>راصد | Rased - دليل الإبداع</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg-dark: #020617;
-            --bg-card: #0f172a;
-            --primary: #1e3a8a;
-            --accent: #ca8a04;
-            --text-light: #f1f5f9;
-            --text-gray: #94a3b8;
-            --glass-border: rgba(255, 255, 255, 0.1);
-        }
+  <meta name="application-name" content="راصد — دليل الاستخدام" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="الدليل التفاعلي الشامل لتطبيق راصد - V4.0.3" />
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; outline: none; }
-        
-        /* تفعيل التمرير الناعم */
-        html { scroll-behavior: smooth; }
+  <!-- (Optional) Preload icon -->
+  <link rel="preload" as="image" href="icon-1.jpg" />
 
-        body { background-color: var(--bg-dark); color: var(--text-light); line-height: 1.8; overflow-x: hidden; }
+  <!-- Tailwind v4 CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-        /* --- Header --- */
-        nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000; padding: 15px 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(2, 6, 23, 0.9); backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--glass-border);
-        }
-        .logo { font-size: 1.5rem; font-weight: 900; color: var(--text-light); display: flex; align-items: center; gap: 10px; }
-        .logo img { height: 40px; width: 40px; border-radius: 10px; } /* Style for the logo image */
-        .nav-links { display: flex; gap: 20px; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--text-gray); font-weight: 600; transition: 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
-        .btn-gold {
-            background: linear-gradient(135deg, #b45309, #d97706); color: white !important; padding: 8px 25px;
-            border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 0.9rem;
-            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3); transition: 0.3s;
-        }
-        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(217, 119, 6, 0.5); }
+  <style>
+    /* ── Base ── */
+    @media screen and (-webkit-min-device-pixel-ratio: 1) {
+      body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    }
 
-        /* --- Hero --- */
-        .hero {
-            padding: 160px 20px 80px; text-align: center;
-            background: radial-gradient(circle at top, #1e3a8a33 0%, var(--bg-dark) 70%);
-        }
-        .hero-logo { width: 120px; height: 120px; border-radius: 25px; margin-bottom: 20px; box-shadow: 0 0 30px rgba(202, 138, 4, 0.2); } /* Style for Hero Logo */
-        .hero h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; line-height: 1.2; }
-        .hero span { color: var(--accent); }
-        .hero p { color: var(--text-gray); font-size: 1.2rem; max-width: 800px; margin: 0 auto 40px; }
+    body { font-family: 'Tajawal', sans-serif; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 6px; }
 
-        /* --- Detailed Features --- */
-        .details-section { padding: 50px 5%; max-width: 1300px; margin: 0 auto; }
-        
-        .feature-row {
-            display: flex; align-items: flex-start; gap: 50px; margin-bottom: 100px;
-            padding: 40px; background: var(--bg-card); border-radius: 30px;
-            border: 1px solid var(--glass-border); position: relative; overflow: hidden;
-            transition: 0.4s;
-        }
-        .feature-row:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        .feature-row::before { content: ''; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: var(--accent); }
+    .font-heavy  { font-weight: 900; }
+    .font-boldest{ font-weight: 800; }
 
-        .feature-content { flex: 1; }
-        .feature-icon {
-            width: 70px; height: 70px; background: rgba(255,255,255,0.05); border-radius: 20px;
-            display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--accent);
-            margin-bottom: 25px; border: 1px solid var(--glass-border);
-        }
-        
-        .feature-row h3 { font-size: 2rem; margin-bottom: 15px; color: var(--text-light); }
-        .feature-row p { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 25px; }
-        
-        .feature-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .feature-list li {
-            display: flex; align-items: start; gap: 10px; font-size: 0.95rem; color: #cbd5e1;
-            padding: 10px; background: rgba(255,255,255,0.02); border-radius: 10px;
-        }
-        .feature-list li i { color: var(--success); margin-top: 5px; color: var(--accent); }
-        .feature-list li strong { color: white; margin-left: 5px; }
+    .gradient-text {
+      background: linear-gradient(to left, #fbbf24, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-text-blue {
+      background: linear-gradient(to left, #818cf8, #6366f1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        .feature-image {
-            flex: 0.8; max-width: 500px; border-radius: 20px; overflow: hidden;
-            border: 1px solid var(--glass-border); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        .feature-image img { width: 100%; height: auto; display: block; transition: 0.5s; }
-        .feature-row:hover .feature-image img { transform: scale(1.03); }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(28px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .hero-anim { opacity:0; animation: fadeUp .9s ease forwards; }
+    .delay-1   { animation-delay:.15s; }
+    .delay-2   { animation-delay:.30s; }
+    .delay-3   { animation-delay:.50s; }
 
-        .feature-row:nth-child(even) { flex-direction: row-reverse; }
-        .feature-row:nth-child(even)::before { left: auto; right: 0; }
+    @keyframes orb {
+      0%,100% { transform: scale(1) translate(0,0); }
+      50%     { transform: scale(1.12) translate(14px,-14px); }
+    }
+    .orb { animation: orb 9s ease-in-out infinite; }
+    .orb2{ animation: orb 12s ease-in-out infinite reverse; }
 
-        /* --- Download Section --- */
-        .download-section { text-align: center; padding: 100px 20px; border-top: 1px solid var(--glass-border); }
-        .download-grid { display: flex; justify-content: center; gap: 30px; margin-top: 50px; flex-wrap: wrap; }
-        
-        .dl-btn {
-            display: flex; align-items: center; gap: 20px; padding: 20px 40px;
-            background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
-            border-radius: 20px; text-decoration: none; width: 350px; transition: 0.3s;
-            cursor: pointer;
-        }
-        .dl-btn:hover { background: var(--accent); border-color: var(--accent); }
-        .dl-btn:hover * { color: white !important; }
-        
-        .dl-icon { font-size: 2.5rem; color: var(--text-gray); }
-        .dl-text h4 { color: var(--text-light); font-size: 1.2rem; margin-bottom: 5px; }
-        .dl-text span { color: var(--text-gray); font-size: 0.9rem; display: block; }
+    /* ── Video player ── */
+    .vid-wrap {
+      position: relative;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      background: #0f172a;
+      box-shadow: 0 30px 60px -10px rgba(0,0,0,.5);
+      border: 1px solid rgba(99,102,241,.22);
+      aspect-ratio: 16/9;
+    }
+    .vid-wrap video {
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+    }
+    .vid-overlay {
+      position:absolute; inset:0;
+      background: linear-gradient(135deg,rgba(15,23,42,.82),rgba(30,27,75,.65));
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      gap:14px;
+      transition: opacity .4s;
+      cursor:pointer;
+    }
+    .vid-overlay.hidden-overlay { opacity:0; pointer-events:none; }
+    .play-ring {
+      width:72px; height:72px;
+      border-radius:50%;
+      background: rgba(99,102,241,.25);
+      border: 2px solid rgba(99,102,241,.55);
+      display:flex; align-items:center; justify-content:center;
+      backdrop-filter: blur(6px);
+      transition: transform .3s, background .3s;
+    }
+    .vid-wrap:hover .play-ring {
+      transform: scale(1.1);
+      background: rgba(99,102,241,.45);
+    }
 
-        /* --- Footer --- */
-        footer { background: #000; padding: 60px 20px; text-align: center; border-top: 1px solid var(--glass-border); }
-        .dev-name { font-size: 1.5rem; color: var(--accent); margin-bottom: 15px; display: block; font-weight: 900; }
-        .contact {
-            display: inline-flex; align-items: center; gap: 10px; color: var(--text-light);
-            text-decoration: none; background: rgba(255,255,255,0.1); padding: 10px 25px;
-            border-radius: 50px; transition: 0.3s;
-        }
-        .contact:hover { background: var(--accent); color: black; }
+    .vid-wrap.orange-border { border-color: rgba(251,191,36,.28); }
+    .vid-wrap.orange-border .play-ring {
+      background: rgba(251,191,36,.2);
+      border-color: rgba(251,191,36,.55);
+    }
+    .vid-wrap.orange-border:hover .play-ring { background: rgba(251,191,36,.4); }
 
-        @media (max-width: 992px) {
-            .feature-row, .feature-row:nth-child(even) { flex-direction: column; gap: 30px; }
-            .feature-image { max-width: 100%; width: 100%; }
-            .feature-list { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2.5rem; }
-            .nav-links { display: none; }
-        }
-    </style>
+    .vid-label {
+      font-size:11px; font-weight:800;
+      color:rgba(255,255,255,.75);
+      background:rgba(0,0,0,.55);
+      padding:4px 10px; border-radius:999px;
+      backdrop-filter: blur(4px);
+      letter-spacing:.5px;
+    }
+    .vid-corner-label {
+      position:absolute; bottom:10px; left:10px;
+      font-size:10px; font-weight:800; color:rgba(255,255,255,.65);
+      background:rgba(0,0,0,.5); padding:3px 8px;
+      border-radius:6px; backdrop-filter:blur(4px);
+    }
+
+    .section-pill {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:5px 14px; border-radius:999px;
+      font-size:12px; font-weight:800;
+      border:1px solid; letter-spacing:.3px;
+    }
+
+    .nav-link { position:relative; padding:4px 0; transition: color .25s; }
+    .nav-link::after {
+      content:''; position:absolute;
+      bottom:-2px; right:0; left:0;
+      height:2px; border-radius:2px;
+      background:#6366f1;
+      transform:scaleX(0);
+      transition:transform .25s;
+    }
+    .nav-link:hover::after { transform:scaleX(1); }
+
+    .hover-lift { transition: transform .3s, box-shadow .3s; }
+    .hover-lift:hover { transform:translateY(-4px); box-shadow:0 20px 40px -8px rgba(0,0,0,.35); }
+
+    .sep { height:1px; background:linear-gradient(to left, transparent, rgba(99,102,241,.3), transparent); }
+
+    @keyframes pulseDot { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.6);opacity:.5} }
+    .pulse-dot { animation:pulseDot 1.8s ease infinite; }
+
+    .pb-safe { padding-bottom: env(safe-area-inset-bottom, 8px); }
+
+    @media (min-width: 1280px) {
+      .desktop-hero-title { font-size: 6rem !important; }
+      .desktop-text-lg    { font-size: 1.2rem !important; }
+    }
+
+    @media (max-width: 1023px) and (min-width: 768px) {
+      .vid-wrap { aspect-ratio: 16/9 !important; }
+      .section-two-col { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .section-two-col .order-swap { order: 0 !important; }
+    }
+
+    @media (max-width: 767px) {
+      .mobile-py { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+      .vid-wrap { border-radius: .75rem !important; }
+      .play-ring { width: 54px !important; height: 54px !important; }
+      .hero-btns { flex-direction: column !important; }
+      .hero-btns a { width: 100% !important; justify-content: center; }
+      .mobile-full { grid-template-columns: 1fr !important; }
+      .mobile-h2 { font-size: 1.9rem !important; line-height: 1.2 !important; }
+      .mobile-h1 { font-size: 2.8rem !important; line-height: 1.15 !important; }
+      .mobile-gap { gap: .625rem !important; }
+      .section-pill { font-size: 11px !important; }
+      .mobile-card-p { padding: .875rem !important; }
+      .orb, .orb2 { display: none !important; }
+      .sep { margin: 0 1rem !important; }
+      #backToTop { bottom: 6rem !important; left: 1rem !important; }
+      .vid-wrap[style*="21/9"] { aspect-ratio: 16/9 !important; }
+      .hero-stats { gap: .75rem !important; }
+      .hero-divider { display:none !important; }
+      .vid-corner-label { display:none; }
+    }
+
+    @media (max-width: 400px) {
+      .mobile-h1 { font-size: 2.2rem !important; }
+      .mobile-h2 { font-size: 1.6rem !important; }
+      .hero-kicker { font-size: 11px !important; padding: 6px 12px !important; }
+    }
+
+    section[id], header[id] { scroll-margin-top: 70px; }
+    @media (max-width: 1023px) { section[id] { scroll-margin-top: 60px; } }
+
+    .nav-link.active { color:white; }
+    .nav-link.active::after { transform:scaleX(1); }
+
+    #mobileMenu { transition: max-height .35s cubic-bezier(.4,0,.2,1); }
+    .hover-lift { user-select: none; }
+
+    @media (hover:none) {
+      .hover-lift:hover { transform:none !important; box-shadow:none !important; }
+      .vid-wrap:hover .play-ring { transform:none !important; }
+    }
+
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .sep { height: 1px; }
+    }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid #6366f1;
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    /* ─────────────────────────────
+       Rased palette (blue + strong orange glow)
+    ───────────────────────────── */
+    :root{
+      --rased-blue-light: #5B8CB9;
+      --rased-blue-deep:  #172A61;
+      --rased-orange:     #F59E0B;
+      --rased-orange2:    #FBBF24;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background: linear-gradient(to bottom, rgba(91,140,185,.95), rgba(23,42,97,.95)) !important;
+    }
+
+    .nav-link::after{
+      background: linear-gradient(to left, var(--rased-orange2), var(--rased-orange), var(--rased-blue-light)) !important;
+      box-shadow: 0 0 18px rgba(245,158,11,.25);
+    }
+
+    .sep{
+      background: linear-gradient(to left,
+        transparent,
+        rgba(91,140,185,.28),
+        rgba(245,158,11,.18),
+        rgba(23,42,97,.28),
+        transparent
+      ) !important;
+    }
+
+    .vid-wrap{
+      border: 1px solid rgba(91,140,185,.22) !important;
+      box-shadow: 0 30px 70px -18px rgba(0,0,0,.55) !important;
+    }
+    .vid-wrap:hover{
+      box-shadow:
+        0 30px 70px -18px rgba(0,0,0,.55),
+        0 0 0 1px rgba(245,158,11,.18),
+        0 0 36px rgba(245,158,11,.16) !important;
+    }
+
+    .vid-overlay{
+      background: linear-gradient(135deg,
+        rgba(15,23,42,.84),
+        rgba(23,42,97,.55),
+        rgba(245,158,11,.10)
+      ) !important;
+    }
+
+    .play-ring{
+      background: rgba(91,140,185,.18) !important;
+      border-color: rgba(91,140,185,.55) !important;
+      box-shadow: 0 0 0 1px rgba(91,140,185,.20), 0 0 22px rgba(245,158,11,.14);
+    }
+    .vid-wrap:hover .play-ring{
+      background: rgba(245,158,11,.18) !important;
+      border-color: rgba(245,158,11,.62) !important;
+      box-shadow: 0 0 0 1px rgba(245,158,11,.22), 0 0 30px rgba(245,158,11,.25);
+    }
+    .vid-wrap.orange-border{
+      border-color: rgba(245,158,11,.35) !important;
+    }
+    .vid-wrap.orange-border .play-ring{
+      background: rgba(245,158,11,.20) !important;
+      border-color: rgba(245,158,11,.70) !important;
+      box-shadow: 0 0 34px rgba(245,158,11,.22);
+    }
+
+    a:focus-visible, button:focus-visible{
+      outline-color: rgba(91,140,185,.95) !important;
+    }
+  </style>
 </head>
-<body>
 
-    <nav>
-        <div class="logo">
-            <img src="icon.jpg" alt="شعار راصد"> راصد PRO
+<body class="bg-slate-950 text-slate-100">
+
+<!-- ═══════════════════════════════════
+     TOP NAV
+═══════════════════════════════════ -->
+<nav class="fixed w-full z-50 bg-slate-950/90 backdrop-blur-xl border-b border-slate-800/60" id="mainNav">
+  <div class="max-w-7xl mx-auto px-4 lg:px-8">
+    <div class="flex justify-between items-center py-3 lg:py-4">
+
+      <!-- Brand (ICON IMG) -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl overflow-hidden border border-slate-700/60 bg-slate-900 shadow-lg flex-shrink-0"
+             style="box-shadow: 0 0 0 1px rgba(91,140,185,.18), 0 0 24px rgba(245,158,11,.14);">
+          <img src="icon-1.jpg" alt="أيقونة راصد" class="w-full h-full object-cover" />
         </div>
-        <ul class="nav-links">
-            <li><a href="#features">المميزات</a></li>
-            <li><a href="#download">التحميل</a></li>
-        </ul>
-        <a href="#download" class="btn-gold">تحميل النسخة</a>
-    </nav>
-
-    <header class="hero">
-        <img src="icon.jpg" alt="شعار راصد" class="hero-logo">
-        <h1>الدليل الشامل لنظام <br> <span>راصد التعليمي</span></h1>
-        <p>نستعرض هنا بالتفصيل كل زاوية في التطبيق، ليكون مرجعك الدائم لإدارة فصلية احترافية.</p>
-    </header>
-
-    <div id="features" class="details-section">
-
-        <div class="feature-row">
-            <div class="feature-content">
-                <div class="feature-icon"><i class="fa-solid fa-gauge-high"></i></div>
-                <h3>1. لوحة القيادة (الرئيسية)</h3>
-                <p>مركز التحكم الذي تبدأ منه يومك الدراسي. تم تصميمها لتعطيك المعلومات الأهم في لمحة بصر.</p>
-                <ul class="feature-list">
-                    <li><i class="fa-solid fa-check"></i> <strong>الهوية الرسمية:</strong> صورتك، اسمك، والمدرسة (قابلة للتعديل).</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>جدول الحصص:</strong> يعرض جدول اليوم تلقائياً مع تحديد الحصة الحالية.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>الجرس الذكي:</strong> زر لتفعيل تنبيهات صوتية لبداية ونهاية الحصة.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>التحضير السريع:</strong> زر ينقلك فوراً لكشف غياب الحصة الحالية.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>استيراد الجدول:</strong> إمكانية رفع الجدول من ملف Excel.</li>
-                </ul>
-            </div>
-            <div class="feature-image">
-                <img src="dashboard_screen.jpg" onerror="this.src='https://placehold.co/600x400/0f172a/ca8a04?text=Dashboard+Image'" alt="لوحة القيادة">
-            </div>
+        <div>
+          <span class="font-heavy text-lg lg:text-xl text-white leading-none block">راصد</span>
+          <span class="text-[10px] text-slate-500 leading-none font-bold hidden sm:block">دليل مدرسة الإبداع للبنين</span>
         </div>
+      </div>
 
-        <div class="feature-row">
-            <div class="feature-content">
-                <div class="feature-icon"><i class="fa-solid fa-users-viewfinder"></i></div>
-                <h3>2. إدارة الفصل والطلاب</h3>
-                <p>الشاشة التي تقضي فيها معظم وقتك، مليئة بأدوات التفاعل لضبط الفصل وخلق جو حماسي.</p>
-                <ul class="feature-list">
-                    <li><i class="fa-solid fa-check"></i> <strong>المؤقت (Timer):</strong> لضبط وقت الأنشطة مع صوت تكتكة.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>القرعة (Dice):</strong> اختيار عشوائي عادل للطلاب الحاضرين فقط.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>تعزيز إيجابي:</strong> منح نقاط (مشاركة، واجب..) بلمسة واحدة.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>تنبيه سلوكي:</strong> رصد المخالفات بسهولة.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>زر واتساب الذكي:</strong> إرسال تقرير سلوك فوري لولي الأمر.</li>
-                </ul>
-            </div>
-            <div class="feature-image">
-                <img src="students_screen.jpg" onerror="this.src='https://placehold.co/600x400/0f172a/ca8a04?text=Students'" alt="الطلاب">
-            </div>
+      <!-- Links — desktop only -->
+      <div class="hidden lg:flex gap-6 xl:gap-7 text-sm font-bold text-slate-400">
+        <a href="#dashboard"  class="nav-link hover:text-white">الداش</a>
+        <a href="#attendance" class="nav-link hover:text-white">الحضور والغياب</a>
+        <a href="#students"   class="nav-link hover:text-white">الطلاب</a>
+        <a href="#grades"     class="nav-link hover:text-white">الدرجات</a>
+        <a href="#knights"    class="nav-link hover:text-white">الفرسان</a>
+        <a href="#reports"    class="nav-link hover:text-white">التقارير</a>
+        <a href="#settings"   class="nav-link hover:text-white">الإعدادات</a>
+      </div>
+
+      <!-- Right side -->
+      <div class="flex items-center gap-3">
+        <div class="hidden lg:flex items-center gap-2">
+          <span class="w-2 h-2 bg-emerald-400 rounded-full pulse-dot"></span>
+          <span class="text-xs font-bold text-slate-400">نسخة المعلم</span>
         </div>
 
-        <div class="feature-row">
-            <div class="feature-content">
-                <div class="feature-icon"><i class="fa-solid fa-clipboard-user"></i></div>
-                <h3>3. رصد الحضور والغياب</h3>
-                <p>نظام دقيق لضبط الانضباط المدرسي بدقة عالية.</p>
-                <ul class="feature-list">
-                    <li><i class="fa-solid fa-check"></i> <strong>الحالات الدقيقة:</strong> (حاضر، غائب، متأخر، هروب).</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>تحضير الكل:</strong> زر واحد لجعل الجميع "حضور".</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>تقرير واتساب:</strong> إرسال تفاصيل الغياب لولي الأمر بضغطة زر.</li>
-                </ul>
-            </div>
-            <div class="feature-image">
-                <img src="attendance_screen.jpg" onerror="this.src='https://placehold.co/600x400/0f172a/ca8a04?text=Attendance'" alt="الغياب">
-            </div>
-        </div>
-
-        <div class="feature-row">
-            <div class="feature-content">
-                <div class="feature-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                <h3>4. سجل الدرجات الإلكتروني</h3>
-                <p>دفتر درجاتك المتطور مع حسابات تلقائية.</p>
-                <ul class="feature-list">
-                    <li><i class="fa-solid fa-check"></i> <strong>أدوات التقويم:</strong> إنشاء أدوات مرنة (اختبار، واجب..).</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>الحساب التلقائي:</strong> جمع التقويم المستمر + النهائي.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>نظام الرموز:</strong> تحويل الدرجة لرمز (أ، ب..) تلقائياً.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>الرصد الجماعي:</strong> رصد درجة موحدة للكل بلمسة.</li>
-                </ul>
-            </div>
-            <div class="feature-image">
-                <img src="grades_screen.jpg" onerror="this.src='https://placehold.co/600x400/0f172a/ca8a04?text=Grades'" alt="الدرجات">
-            </div>
-        </div>
-
-        <div class="feature-row">
-            <div class="feature-content">
-                <div class="feature-icon"><i class="fa-solid fa-trophy"></i></div>
-                <h3>5. فرسان الشهر</h3>
-                <p>ساحة التنافس الشريف لتكريم المتميزين.</p>
-                <ul class="feature-list">
-                    <li><i class="fa-solid fa-check"></i> <strong>الترتيب التلقائي:</strong> حسب مجموع نقاط السلوك.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>منصة التتويج:</strong> عرض مميز للمراكز الثلاثة الأولى.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>طباعة الشهادة:</strong> إنشاء شهادة تقدير رسمية فورية.</li>
-                </ul>
-            </div>
-            <div class="feature-image">
-                <img src="leaderboard_screen.jpg" onerror="this.src='https://placehold.co/600x400/0f172a/ca8a04?text=Leaderboard'" alt="الفرسان">
-            </div>
-        </div>
-
-        <div class="feature-row">
-            <div class="feature-content">
-                <div class="feature-icon"><i class="fa-solid fa-print"></i></div>
-                <h3>6. مركز التقارير</h3>
-                <p>المطبعة الذكية لإصدار الوثائق الرسمية.</p>
-                <ul class="feature-list">
-                    <li><i class="fa-solid fa-check"></i> <strong>ملف الطالب الشامل:</strong> تقرير شامل (سلوك ودرجات).</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>شهادات التقدير:</strong> تكريم جماعي للفصل.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>استدعاء ولي أمر:</strong> خطاب رسمي جاهز للطباعة.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>كشوفات الدرجات:</strong> كشف كلاسيكي جاهز للتسليم.</li>
-                </ul>
-            </div>
-            <div class="feature-image">
-                <img src="reports_screen.jpg" onerror="this.src='https://placehold.co/600x400/0f172a/ca8a04?text=Reports'" alt="التقارير">
-            </div>
-        </div>
-
-        <div class="feature-row">
-            <div class="feature-content">
-                <div class="feature-icon"><i class="fa-solid fa-gears"></i></div>
-                <h3>7. الإعدادات والنسخ الاحتياطي</h3>
-                <p>تحكم كامل في بياناتك وبيئة التطبيق.</p>
-                <ul class="feature-list">
-                    <li><i class="fa-solid fa-check"></i> <strong>النسخ الاحتياطي:</strong> حفظ واستعادة البيانات.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>تخصيص الهوية:</strong> رفع شعار الوزارة وختم المدرسة.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>نوع المدرسة:</strong> ضبط الأيقونات (بنين / بنات).</li>
-                </ul>
-            </div>
-            <div class="feature-image">
-                <img src="settings_screen.jpg" onerror="this.src='https://placehold.co/600x400/0f172a/ca8a04?text=Settings'" alt="الإعدادات">
-            </div>
-        </div>
-
+        <button id="menuBtn" onclick="toggleMenu()"
+          class="lg:hidden flex flex-col gap-1.5 p-2 rounded-lg bg-slate-800/60 border border-slate-700"
+          aria-label="القائمة">
+          <span class="w-5 h-0.5 bg-slate-300 rounded transition-all" id="hb1"></span>
+          <span class="w-5 h-0.5 bg-slate-300 rounded transition-all" id="hb2"></span>
+          <span class="w-5 h-0.5 bg-slate-300 rounded transition-all" id="hb3"></span>
+        </button>
+      </div>
     </div>
 
-    <section id="download" class="download-section">
-        <h2 style="font-size: 2.5rem; margin-bottom: 30px;">ابدأ التجربة الآن</h2>
-        <div class="download-grid">
-            
-            <a href="https://github.com/alzaabi555/-Build-iOS/releases/download/v3.8.4/StudentManager-Android.apk" class="dl-btn" target="_blank">
-                <i class="fa-brands fa-android dl-icon" style="color: #3DDC84;"></i>
-                <div class="dl-text">
-                    <h4>نسخة الأندرويد</h4>
-                    <span>APK</span>
-                </div>
-            </a>
-            
-            <a href="https://github.com/alzaabi555/-Build-iOS/releases/download/v3.8.5/student-manager-app-setup-3.8.5.exe" class="dl-btn" target="_blank">
-                <i class="fa-brands fa-windows dl-icon" style="color: #0078D6;"></i>
-                <div class="dl-text">
-                    <h4>نسخة الويندوز</h4>
-                    <span>EXE</span>
-                </div>
-            </a>
-
+    <!-- Mobile dropdown menu -->
+    <div id="mobileMenu" class="lg:hidden overflow-hidden transition-all duration-300" style="max-height:0">
+      <div class="pb-4 pt-1 flex flex-col gap-1">
+        <a href="#dashboard"  onclick="closeMenu()" class="px-4 py-3 text-sm font-bold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl flex items-center gap-3"><i data-lucide="home" class="w-4"></i>لوحة القيادة</a>
+        <a href="#attendance" onclick="closeMenu()" class="px-4 py-3 text-sm font-bold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl flex items-center gap-3"><i data-lucide="user-check" class="w-4"></i>الحضور والغياب</a>
+        <a href="#students"   onclick="closeMenu()" class="px-4 py-3 text-sm font-bold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl flex items-center gap-3"><i data-lucide="users" class="w-4"></i>إدارة الطلاب</a>
+        <a href="#grades"     onclick="closeMenu()" class="px-4 py-3 text-sm font-bold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl flex items-center gap-3"><i data-lucide="calculator" class="w-4"></i>سجل الدرجات</a>
+        <a href="#knights"    onclick="closeMenu()" class="px-4 py-3 text-sm font-bold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl flex items-center gap-3"><i data-lucide="crown" class="w-4"></i>لوحة الفرسان</a>
+        <a href="#reports"    onclick="closeMenu()" class="px-4 py-3 text-sm font-bold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl flex items-center gap-3"><i data-lucide="printer" class="w-4"></i>مركز التقارير</a>
+        <a href="#settings"   onclick="closeMenu()" class="px-4 py-3 text-sm font-bold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl flex items-center gap-3"><i data-lucide="settings" class="w-4"></i>الإعدادات</a>
+        <div class="mt-2 mx-4 pt-3 border-t border-slate-800 flex items-center gap-2">
+          <span class="w-2 h-2 bg-emerald-400 rounded-full pulse-dot"></span>
+          <span class="text-xs font-bold text-slate-500">نسخة المعلم — مدرسة الإبداع للبنين</span>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</nav>
 
-    <footer>
-        <span class="dev-name">أ. محمد الزعابي</span>
-        <p style="margin-bottom: 20px;">فكرة وإعداد وتطوير</p>
-        
-        <a href="https://wa.me/96898344555" class="contact">
-            <i class="fa-brands fa-whatsapp"></i> الدعم الفني: 98344555
-        </a>
-        
-        <p style="margin-top: 40px; font-size: 0.8rem; opacity: 0.5;">جميع الحقوق محفوظة © 2026 تطبيق راصد PRO</p>
-    </footer>
+<!-- ═══════════════════════════════════
+     HERO
+═══════════════════════════════════ -->
+<header class="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden">
+  <div class="absolute -top-40 -right-40 w-[600px] h-[600px] bg-indigo-700/20 rounded-full blur-[120px] orb pointer-events-none"></div>
+  <div class="absolute bottom-0 -left-40 w-[500px] h-[500px] bg-amber-600/12 rounded-full blur-[140px] orb2 pointer-events-none"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-900/20 rounded-full blur-[180px] pointer-events-none"></div>
 
+  <div class="absolute inset-0 opacity-[0.04]"
+       style="background-image:linear-gradient(rgba(99,102,241,.8)1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.8)1px,transparent 1px);background-size:48px 48px;">
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
+    <div class="hero-anim inline-flex items-center gap-2 bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 px-5 py-2 rounded-full text-sm font-bold mb-8 hero-kicker">
+      <span class="w-2 h-2 bg-emerald-400 rounded-full pulse-dot"></span>
+      محدّث 2026 — مدرسة الإبداع للبنين · سلطنة عُمان
+    </div>
+
+    <h1 class="hero-anim delay-1 text-5xl md:text-7xl lg:text-8xl font-heavy text-white mb-6 leading-[1.1] mobile-h1">
+      إدارتك الصفية<br/>
+      <span class="gradient-text">بلمسة ذكية</span>
+    </h1>
+
+    <p class="hero-anim delay-2 text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed font-medium">
+      الدليل التفاعلي الشامل لتطبيق <strong class="text-white">راصد</strong> — يحوّل هاتفك إلى مساعد إداري محترف بلا أوراق.
+    </p>
+
+    <div class="hero-anim delay-2 flex flex-wrap justify-center gap-6 mb-10 hero-stats">
+      <div class="flex items-center gap-2 text-sm font-bold text-slate-400">
+        <i data-lucide="wifi-off" class="w-4 text-emerald-400"></i> أوفلاين ١٠٠٪
+      </div>
+      <div class="w-px h-5 bg-slate-700 self-center hidden sm:block hero-divider"></div>
+      <div class="flex items-center gap-2 text-sm font-bold text-slate-400">
+        <i data-lucide="message-circle" class="w-4 text-green-400"></i> واتساب مزدوج
+      </div>
+      <div class="w-px h-5 bg-slate-700 self-center hidden sm:block hero-divider"></div>
+      <div class="flex items-center gap-2 text-sm font-bold text-slate-400">
+        <i data-lucide="file-text" class="w-4 text-amber-400"></i> PDF + Excel
+      </div>
+      <div class="w-px h-5 bg-slate-700 self-center hidden sm:block hero-divider"></div>
+      <div class="flex items-center gap-2 text-sm font-bold text-slate-400">
+        <i data-lucide="shield-check" class="w-4 text-indigo-400"></i> خصوصية تامة
+      </div>
+    </div>
+
+    <div class="hero-anim delay-3 flex flex-col sm:flex-row justify-center gap-4 hero-btns">
+      <a href="#dashboard" class="bg-amber-400 text-slate-900 px-8 py-4 rounded-2xl font-heavy text-base
+         shadow-[0_0_24px_rgba(251,191,36,.4)] hover:shadow-[0_0_36px_rgba(251,191,36,.6)]
+         transition-all transform hover:scale-105 flex items-center justify-center gap-2">
+        <i data-lucide="circle-play" class="w-5 h-5"></i> ابدأ الجولة
+      </a>
+      <a href="#settings" class="bg-slate-800 text-slate-200 px-8 py-4 rounded-2xl font-heavy text-base
+         border border-slate-700 hover:border-indigo-500/50 hover:bg-slate-700
+         transition-all flex items-center justify-center gap-2">
+        <i data-lucide="settings" class="w-5 h-5"></i> الإعدادات
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="h-px bg-gradient-to-l from-transparent via-indigo-500/50 to-transparent"></div>
+
+<!-- ═══════════════════════════════════
+     1 · DASHBOARD
+═══════════════════════════════════ -->
+<section id="dashboard" class="py-28 relative mobile-py">
+  <div class="max-w-7xl mx-auto px-4 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <div data-aos="fade-left" data-aos-duration="700">
+        <div class="section-pill bg-indigo-500/10 border-indigo-500/25 text-indigo-300 mb-4">
+          <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> القسم الأول
+        </div>
+        <h2 class="text-4xl lg:text-5xl font-heavy text-white mb-4 leading-tight mobile-h2">
+          لوحة القيادة <span class="gradient-text-blue">(الداش)</span>
+        </h2>
+        <p class="text-slate-400 text-lg mb-8 leading-relaxed font-medium">
+          مركز التحكم الذي يعطيك ملخص يومك الدراسي في لمحة واحدة.
+        </p>
+
+        <div class="space-y-3">
+          <div class="flex gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-indigo-500/40 transition-all hover-lift cursor-default">
+            <div class="bg-indigo-500/15 text-indigo-400 p-3 rounded-xl h-fit flex-shrink-0"><i data-lucide="user-round-cog" class="w-5 h-5"></i></div>
+            <div>
+              <h4 class="font-bold text-white text-sm">الهوية الرسمية (Pop-up)</h4>
+              <p class="text-slate-500 text-xs mt-1 leading-relaxed">اضغط على صورتك لتعديل التوقيع والختم والشعار — ستظهر تلقائياً في كل التقارير.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-amber-500/40 transition-all hover-lift cursor-default">
+            <div class="bg-amber-500/15 text-amber-400 p-3 rounded-xl h-fit flex-shrink-0"><i data-lucide="calendar-check-2" class="w-5 h-5"></i></div>
+            <div>
+              <h4 class="font-bold text-white text-sm">الجدول اليومي التفاعلي</h4>
+              <p class="text-slate-500 text-xs mt-1 leading-relaxed">الحصة الحالية تضيء بـ(الآن) مع زر (تحضير ←) للانتقال المباشر.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-all hover-lift cursor-default">
+            <div class="bg-emerald-500/15 text-emerald-400 p-3 rounded-xl h-fit flex-shrink-0"><i data-lucide="share-2" class="w-5 h-5"></i></div>
+            <div>
+              <h4 class="font-bold text-white text-sm">خطة التقويم المستمر (Timeline)</h4>
+              <p class="text-slate-500 text-xs mt-1 leading-relaxed">بطاقات شهرية ذكية تنبض باللون لتذكيرك بالاختبارات والتقارير.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-rose-500/40 transition-all hover-lift cursor-default">
+            <div class="bg-rose-500/15 text-rose-400 p-3 rounded-xl h-fit flex-shrink-0"><i data-lucide="bell-dot" class="w-5 h-5"></i></div>
+            <div>
+              <h4 class="font-bold text-white text-sm">شريط التنبيهات العائم</h4>
+              <p class="text-slate-500 text-xs mt-1 leading-relaxed">يظهر أسفل الشاشة للمهام العاجلة مع إمكانية الإخفاء.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative" data-aos="fade-right" data-aos-duration="700">
+        <div class="absolute -inset-6 bg-indigo-600/5 rounded-[2.5rem] rotate-2 -z-10"></div>
+        <div class="vid-wrap" id="vid-dashboard" onclick="playVideo(this)">
+          <video preload="metadata" playsinline src="videos/dashboard.mp4"></video>
+          <div class="vid-overlay">
+            <div class="play-ring"><i data-lucide="play" class="w-8 h-8 text-white fill-white"></i></div>
+            <span class="vid-label">شرح لوحة القيادة</span>
+          </div>
+          <span class="vid-corner-label">dashboard.mp4</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="sep mx-8"></div>
+
+<!-- ═══════════════════════════════════
+     2 · ATTENDANCE
+═══════════════════════════════════ -->
+<section id="attendance" class="py-28 relative mobile-py">
+  <div class="absolute top-0 right-0 w-80 h-80 bg-emerald-700/10 rounded-full blur-[100px] pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
+
+    <div class="text-center mb-16" data-aos="fade-down" data-aos-duration="700">
+      <div class="section-pill bg-emerald-500/10 border-emerald-500/25 text-emerald-300 mb-4 mx-auto w-fit">
+        <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> القسم الثاني
+      </div>
+      <h2 class="text-4xl lg:text-5xl font-heavy text-white mb-4 mobile-h2">
+        سجل <span style="background:linear-gradient(to left,#34d399,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">الحضور والغياب</span>
+      </h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">ليس مجرد كشف ورقي، بل نظام إنذار مبكر ومساعد إداري.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-16">
+      <div class="bg-slate-900/70 p-6 rounded-3xl border border-slate-800 hover:border-emerald-500/30 transition-all hover-lift" data-aos="fade-up" data-aos-delay="100">
+        <div class="w-12 h-12 bg-emerald-500/15 text-emerald-400 rounded-2xl flex items-center justify-center mb-5"><i data-lucide="layers" class="w-5"></i></div>
+        <h3 class="text-lg font-bold text-white mb-2">التحضير الجماعي</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">أزرار "حضور الكل" و"غياب الكل" تنجز المهمة في ثانية واحدة مع عداد حي.</p>
+      </div>
+      <div class="bg-slate-900/70 p-6 rounded-3xl border border-slate-800 hover:border-rose-500/30 transition-all hover-lift" data-aos="fade-up" data-aos-delay="200">
+        <div class="w-12 h-12 bg-rose-500/15 text-rose-400 rounded-2xl flex items-center justify-center mb-5"><i data-lucide="message-circle" class="w-5"></i></div>
+        <h3 class="text-lg font-bold text-white mb-2">تنبيه ولي الأمر</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">عند تسجيل "غياب" يسألك التطبيق فوراً: هل تود إرسال رسالة واتساب جاهزة؟</p>
+      </div>
+      <div class="bg-slate-900/70 p-6 rounded-3xl border border-slate-800 hover:border-blue-500/30 transition-all hover-lift" data-aos="fade-up" data-aos-delay="300">
+        <div class="w-12 h-12 bg-blue-500/15 text-blue-400 rounded-2xl flex items-center justify-center mb-5"><i data-lucide="table" class="w-5"></i></div>
+        <h3 class="text-lg font-bold text-white mb-2">تصدير شهري</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">توليد ملف Excel تلقائي للشهر بالرموز (✓ غ ت) والإحصائيات النهائية.</p>
+      </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto" data-aos="zoom-in">
+      <div class="vid-wrap" id="vid-attendance" onclick="playVideo(this)">
+        <video preload="metadata" playsinline src="videos/attendance.mp4"></video>
+        <div class="vid-overlay">
+          <div class="play-ring"><i data-lucide="play" class="w-8 h-8 text-white fill-white"></i></div>
+          <span class="vid-label">شرح سجل الحضور والغياب</span>
+        </div>
+        <span class="vid-corner-label">attendance.mp4</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep mx-8"></div>
+
+<!-- ═══════════════════════════════════
+     3 · STUDENTS
+═══════════════════════════════════ -->
+<section id="students" class="py-28 relative mobile-py">
+  <div class="max-w-7xl mx-auto px-4 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <div class="relative order-2 lg:order-1" data-aos="fade-right" data-aos-duration="700">
+        <div class="absolute -inset-6 bg-pink-600/5 rounded-[2.5rem] -rotate-2 -z-10"></div>
+        <div class="vid-wrap orange-border" id="vid-students" onclick="playVideo(this)">
+          <video preload="metadata" playsinline src="videos/students.mp4"></video>
+          <div class="vid-overlay">
+            <div class="play-ring"><i data-lucide="play" class="w-8 h-8 text-white fill-white"></i></div>
+            <span class="vid-label">شرح إدارة الطلاب</span>
+          </div>
+          <span class="vid-corner-label">students.mp4</span>
+        </div>
+      </div>
+
+      <div class="order-1 lg:order-2" data-aos="fade-left" data-aos-duration="700">
+        <div class="section-pill bg-pink-500/10 border-pink-500/25 text-pink-300 mb-4">
+          <i data-lucide="users" class="w-3.5 h-3.5"></i> القسم الثالث
+        </div>
+        <h2 class="text-4xl lg:text-5xl font-heavy text-white mb-4 leading-tight mobile-h2">
+          إدارة الطلاب <span style="background:linear-gradient(to left,#f472b6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">والتحفيز</span>
+        </h2>
+        <p class="text-slate-400 text-lg mb-8 leading-relaxed font-medium">أدوات تفاعلية تكسر جمود الحصة وتزيد من دافعية الطلاب.</p>
+
+        <div class="grid grid-cols-2 gap-3 mobile-gap">
+          <div class="bg-slate-900/70 p-4 rounded-2xl border border-slate-800 hover:border-pink-500/30 transition hover-lift cursor-default">
+            <div class="text-pink-400 mb-2"><i data-lucide="dice-5" class="w-5"></i></div>
+            <strong class="block text-white text-sm mb-1">القرعة العشوائية</strong>
+            <span class="text-xs text-slate-500 leading-relaxed">تختار من الحاضرين فقط مع مؤثرات احتفالية 🎉</span>
+          </div>
+          <div class="bg-slate-900/70 p-4 rounded-2xl border border-slate-800 hover:border-amber-500/30 transition hover-lift cursor-default">
+            <div class="text-amber-400 mb-2"><i data-lucide="timer" class="w-5"></i></div>
+            <strong class="block text-white text-sm mb-1">المؤقت الصفي</strong>
+            <span class="text-xs text-slate-500 leading-relaxed">ينبض ويغير لونه مع جرس تنبيه عند الانتهاء.</span>
+          </div>
+          <div class="bg-slate-900/70 p-4 rounded-2xl border border-slate-800 hover:border-indigo-500/30 transition hover-lift cursor-default">
+            <div class="text-indigo-400 mb-2"><i data-lucide="upload" class="w-5"></i></div>
+            <strong class="block text-white text-sm mb-1">الاستيراد الذكي</strong>
+            <span class="text-xs text-slate-500 leading-relaxed">قالب Excel جاهز لإضافة مئات الطلاب.</span>
+          </div>
+          <div class="bg-slate-900/70 p-4 rounded-2xl border border-slate-800 hover:border-emerald-500/30 transition hover-lift cursor-default">
+            <div class="text-emerald-400 mb-2"><i data-lucide="star" class="w-5"></i></div>
+            <strong class="block text-white text-sm mb-1">مكافأة الانضباط</strong>
+            <span class="text-xs text-slate-500 leading-relaxed">نقطتا هدوء لجميع الحاضرين بضغطة واحدة.</span>
+          </div>
+          <div class="col-span-2 bg-slate-900/70 p-4 rounded-2xl border border-green-500/25 hover:border-green-500/45 transition hover-lift cursor-default" style="background:rgba(16,185,129,.06)">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="flex gap-2">
+                <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                <span class="w-3 h-3 rounded-full bg-orange-400"></span>
+              </div>
+              <strong class="text-white text-sm">واتساب مزدوج ذكي</strong>
+            </div>
+            <p class="text-xs text-slate-500 leading-relaxed">🟢 البشائر: تقرير تميز لولي الأمر · 🟠 الإنذار: تقرير مفصل بالمخالفات</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="sep mx-8"></div>
+
+<!-- ═══════════════════════════════════
+     4 · GRADES
+═══════════════════════════════════ -->
+<section id="grades" class="py-28 relative mobile-py">
+  <div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-700/10 rounded-full blur-[100px] pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <div data-aos="fade-left" data-aos-duration="700">
+        <div class="section-pill bg-blue-500/10 border-blue-500/25 text-blue-300 mb-4">
+          <i data-lucide="calculator" class="w-3.5 h-3.5"></i> القسم الرابع
+        </div>
+        <h2 class="text-4xl lg:text-5xl font-heavy text-white mb-4 leading-tight mobile-h2">
+          سجل الدرجات <span style="background:linear-gradient(to left,#93c5fd,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">والتحليل</span>
+        </h2>
+        <p class="text-slate-400 text-lg mb-8 leading-relaxed font-medium">رصد دقيق وتحليل فوري لمستوى كل طالب — وداعاً للأوراق المعقدة.</p>
+
+        <ul class="space-y-4">
+          <li class="flex items-start gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-blue-500/30 transition hover-lift cursor-default">
+            <div class="bg-blue-500/15 text-blue-400 p-2.5 rounded-xl flex-shrink-0"><i data-lucide="wand" class="w-5"></i></div>
+            <div>
+              <strong class="block text-white text-sm mb-1">الرصد الجماعي (Magic Fill)</strong>
+              <span class="text-slate-500 text-xs leading-relaxed">إدخال درجة موحدة لجميع طلاب الفصل بضغطة واحدة لتوفير الوقت.</span>
+            </div>
+          </li>
+          <li class="flex items-start gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-indigo-500/30 transition hover-lift cursor-default">
+            <div class="bg-indigo-500/15 text-indigo-400 p-2.5 rounded-xl flex-shrink-0"><i data-lucide="sliders-horizontal" class="w-5"></i></div>
+            <div>
+              <strong class="block text-white text-sm mb-1">أدوات التقويم المتقدمة</strong>
+              <span class="text-slate-500 text-xs leading-relaxed">إنشاء وحذف أعمدة الدرجات، تحديد الامتحان النهائي (★) وضبط الأوزان.</span>
+            </div>
+          </li>
+          <li class="flex items-start gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/30 transition hover-lift cursor-default">
+            <div class="bg-emerald-500/15 text-emerald-400 p-2.5 rounded-xl flex-shrink-0"><i data-lucide="pie-chart" class="w-5"></i></div>
+            <div>
+              <strong class="block text-white text-sm mb-1">التلوين التلقائي الذكي</strong>
+              <span class="text-slate-500 text-xs leading-relaxed">الدرجات تلون نفسها — أخضر للممتاز، أحمر للضعيف، تلقائياً.</span>
+            </div>
+          </li>
+          <li class="flex items-start gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-amber-500/30 transition hover-lift cursor-default">
+            <div class="bg-amber-500/15 text-amber-400 p-2.5 rounded-xl flex-shrink-0"><i data-lucide="sheet" class="w-5"></i></div>
+            <div>
+              <strong class="block text-white text-sm mb-1">تصدير Excel بضغطة زر</strong>
+              <span class="text-slate-500 text-xs leading-relaxed">ملف متكامل: أسماء + درجات + مجموع + تقدير (أ، ب، ج) جاهز للرفع.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="relative" data-aos="fade-right" data-aos-duration="700">
+        <div class="absolute -inset-6 bg-blue-600/5 rounded-[2.5rem] rotate-2 -z-10"></div>
+        <div class="vid-wrap" id="vid-grades" onclick="playVideo(this)">
+          <video preload="metadata" playsinline src="videos/grades.mp4"></video>
+          <div class="vid-overlay">
+            <div class="play-ring"><i data-lucide="play" class="w-8 h-8 text-white fill-white"></i></div>
+            <span class="vid-label">شرح سجل الدرجات</span>
+          </div>
+          <span class="vid-corner-label">grades.mp4</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="sep mx-8"></div>
+
+<!-- ═══════════════════════════════════
+     5 · KNIGHTS
+═══════════════════════════════════ -->
+<section id="knights" class="py-28 relative mobile-py">
+  <div class="absolute top-0 right-0 w-96 h-96 bg-amber-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
+
+    <div class="text-center mb-16" data-aos="zoom-in">
+      <div class="section-pill bg-amber-500/10 border-amber-500/25 text-amber-300 mb-4 mx-auto w-fit">
+        <i data-lucide="crown" class="w-3.5 h-3.5"></i> القسم الخامس
+      </div>
+      <h2 class="text-4xl lg:text-5xl font-heavy text-white mb-4 mobile-h2">
+        لوحة <span class="gradient-text">الفرسان</span>
+      </h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">بيئة تنافسية تُحفز الطلاب على التميز والانضباط.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+
+      <div data-aos="fade-right" data-aos-duration="700">
+        <div class="space-y-4">
+          <div class="bg-amber-950/30 border border-amber-500/20 rounded-3xl p-6 hover-lift cursor-default">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="bg-amber-500/20 text-amber-400 p-3 rounded-xl"><i data-lucide="trophy" class="w-5"></i></div>
+              <h3 class="font-bold text-white">منصة الأبطال (Top 3)</h3>
+            </div>
+            <p class="text-slate-400 text-sm leading-relaxed">إبراز الثلاثة الأوائل بأحجام مختلفة مع تاج متحرك 👑 ينبض للمركز الأول، وعرض الاسم الأول والأخير لمنع التشابه.</p>
+          </div>
+
+          <div class="bg-amber-950/30 border border-amber-500/20 rounded-3xl p-6 hover-lift cursor-default">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="bg-amber-500/20 text-amber-400 p-3 rounded-xl"><i data-lucide="award" class="w-5"></i></div>
+              <h3 class="font-bold text-white">شهادة التميز الرقمية</h3>
+            </div>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">بضغطة زر تنبثق شهادة فخمة تحمل شعار الوزارة واسم المدرسة وسبب التكريم والتواقيع والختم.</p>
+            <div class="flex gap-2 flex-wrap">
+              <span class="text-xs bg-amber-500/10 border border-amber-500/20 text-amber-300 px-3 py-1 rounded-full font-bold">شعار الوزارة</span>
+              <span class="text-xs bg-amber-500/10 border border-amber-500/20 text-amber-300 px-3 py-1 rounded-full font-bold">توقيع الإدارة</span>
+              <span class="text-xs bg-amber-500/10 border border-amber-500/20 text-amber-300 px-3 py-1 rounded-full font-bold">تحميل PDF 📥</span>
+            </div>
+          </div>
+
+          <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-5 hover-lift cursor-default flex items-start gap-4">
+            <div class="bg-rose-500/15 text-rose-400 p-3 rounded-xl flex-shrink-0"><i data-lucide="circle-minus" class="w-5"></i></div>
+            <div>
+              <h3 class="font-bold text-white mb-1">التصحيح السريع</h3>
+              <p class="text-slate-500 text-sm leading-relaxed">زر مخصص لخصم النقاط في حال إضافتها بالخطأ.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-aos="fade-left" data-aos-duration="700">
+        <div class="vid-wrap orange-border" id="vid-knights" onclick="playVideo(this)">
+          <video preload="metadata" playsinline src="videos/knights.mp4"></video>
+          <div class="vid-overlay">
+            <div class="play-ring"><i data-lucide="play" class="w-8 h-8 text-white fill-white"></i></div>
+            <span class="vid-label">شرح لوحة الفرسان</span>
+          </div>
+          <span class="vid-corner-label">knights.mp4</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="sep mx-8"></div>
+
+<!-- ═══════════════════════════════════
+     6 · REPORTS
+═══════════════════════════════════ -->
+<section id="reports" class="py-28 relative mobile-py">
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 bg-indigo-700/10 rounded-full blur-[100px] pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
+
+    <div class="text-center mb-16" data-aos="zoom-in">
+      <div class="section-pill bg-indigo-500/10 border-indigo-500/25 text-indigo-300 mb-4 mx-auto w-fit">
+        <i data-lucide="printer" class="w-3.5 h-3.5"></i> القسم السادس
+      </div>
+      <h2 class="text-4xl lg:text-5xl font-heavy text-white mb-4 mobile-h2">
+        مركز <span class="gradient-text-blue">التقارير</span>
+      </h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">مصنع الوثائق الرسمية — من البيانات إلى الورق بلمسة واحدة.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      <div data-aos="fade-right" data-aos-duration="700">
+        <div class="grid grid-cols-1 gap-4">
+          <div class="flex gap-4 p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-indigo-500/35 transition hover-lift cursor-default">
+            <div class="bg-indigo-500/15 text-indigo-400 p-3 rounded-xl flex-shrink-0 h-fit"><i data-lucide="user-square-2" class="w-5"></i></div>
+            <div>
+              <strong class="block text-white text-sm mb-1">تقرير الطالب الشامل</strong>
+              <p class="text-slate-500 text-xs leading-relaxed">ملف لكل طالب: بيانات + سلوك + درجات + رسم بياني، مع طباعة جماعية للفصل (Batch Print).</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-blue-500/35 transition hover-lift cursor-default">
+            <div class="bg-blue-500/15 text-blue-400 p-3 rounded-xl flex-shrink-0 h-fit"><i data-lucide="bar-chart-big" class="w-5"></i></div>
+            <div>
+              <strong class="block text-white text-sm mb-1">كشف الدرجات الرسمي</strong>
+              <p class="text-slate-500 text-xs leading-relaxed">كشف مطابق للمواصفات الرسمية مع تلوين المجاميع وتمييز الطلاب المتعثرين.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-amber-500/35 transition hover-lift cursor-default">
+            <div class="bg-amber-500/15 text-amber-400 p-3 rounded-xl flex-shrink-0 h-fit"><i data-lucide="book-open" class="w-5"></i></div>
+            <div>
+              <strong class="block text-white text-sm mb-1">طباعة شهادات جماعية</strong>
+              <p class="text-slate-500 text-xs leading-relaxed">تخصيص العنوان والنص + طباعة PDF واحد جاهز للقص لجميع الفصل.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-rose-500/35 transition hover-lift cursor-default">
+            <div class="bg-rose-500/15 text-rose-400 p-3 rounded-xl flex-shrink-0 h-fit"><i data-lucide="mail" class="w-5"></i></div>
+            <div>
+              <strong class="block text-white text-sm mb-1">استدعاء ولي الأمر</strong>
+              <p class="text-slate-500 text-xs leading-relaxed">رسالة استدعاء رسمية جاهزة مع سبب محدد وموعد الزيارة.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-aos="fade-left" data-aos-duration="700">
+        <div class="vid-wrap orange-border" id="vid-reports" onclick="playVideo(this)">
+          <video preload="metadata" playsinline src="videos/reports.mp4"></video>
+          <div class="vid-overlay">
+            <div class="play-ring"><i data-lucide="play" class="w-8 h-8 text-white fill-white"></i></div>
+            <span class="vid-label">شرح مركز التقارير</span>
+          </div>
+          <span class="vid-corner-label">reports.mp4</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="sep mx-8"></div>
+
+<!-- ═══════════════════════════════════
+     7 · SETTINGS
+═══════════════════════════════════ -->
+<section id="settings" class="py-28 relative mobile-py">
+  <div class="max-w-7xl mx-auto px-4 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <div data-aos="fade-left" data-aos-duration="700">
+        <div class="section-pill bg-slate-500/10 border-slate-500/25 text-slate-300 mb-4">
+          <i data-lucide="settings" class="w-3.5 h-3.5"></i> القسم السابع
+        </div>
+        <h2 class="text-4xl lg:text-5xl font-heavy text-white mb-4 leading-tight mobile-h2">
+          غرفة <span style="background:linear-gradient(to left,#94a3b8,#64748b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">التحكم</span>
+        </h2>
+        <p class="text-slate-400 text-lg mb-8 leading-relaxed font-medium">تطبيقك يعمل بشروطك — بأمان 100٪ أوفلاين.</p>
+
+        <div class="space-y-3">
+          <div class="flex gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/30 transition hover-lift cursor-default">
+            <div class="bg-emerald-500/15 text-emerald-400 p-2.5 rounded-xl flex-shrink-0"><i data-lucide="save" class="w-5"></i></div>
+            <div>
+              <strong class="block text-white text-sm mb-1">النسخ الاحتياطي</strong>
+              <span class="text-slate-500 text-xs leading-relaxed">نسخة كاملة (طلاب، درجات، تخصيصات) تُحفظ على جهازك وتُستعاد عند تغيير الهاتف.</span>
+            </div>
+          </div>
+          <div class="flex gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-blue-500/30 transition hover-lift cursor-default">
+            <div class="bg-blue-500/15 text-blue-400 p-2.5 rounded-xl flex-shrink-0"><i data-lucide="refresh-cw" class="w-5"></i></div>
+            <div>
+              <strong class="block text-white text-sm mb-1">الفصول الدراسية</strong>
+              <span class="text-slate-500 text-xs leading-relaxed">تبديل سلس بين الفصل الأول والثاني لفصل الدرجات والمحفوظات تماماً.</span>
+            </div>
+          </div>
+          <div class="flex gap-4 p-4 rounded-2xl bg-slate-900/60 border border-rose-500/20 hover:border-rose-500/40 transition hover-lift cursor-default">
+            <div class="bg-rose-500/15 text-rose-400 p-2.5 rounded-xl flex-shrink-0"><i data-lucide="trash-2" class="w-5"></i></div>
+            <div>
+              <strong class="block text-white text-sm mb-1">تصفير البيانات</strong>
+              <span class="text-slate-500 text-xs leading-relaxed">حذف الدرجات فقط أو تهيئة كاملة مع نوافذ تحذيرية للحماية من الخطأ.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative" data-aos="fade-right" data-aos-duration="700">
+        <div class="vid-wrap" id="vid-settings" onclick="playVideo(this)">
+          <video preload="metadata" playsinline src="videos/settings.mp4"></video>
+          <div class="vid-overlay">
+            <div class="play-ring"><i data-lucide="play" class="w-8 h-8 text-white fill-white"></i></div>
+            <span class="vid-label">شرح الإعدادات</span>
+          </div>
+          <span class="vid-corner-label">settings.mp4</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="sep mx-8"></div>
+
+<!-- ═══════════════════════════════════
+     FAQ
+═══════════════════════════════════ -->
+<section class="py-24 relative mobile-py">
+  <div class="max-w-3xl mx-auto px-4">
+    <h3 class="text-3xl font-heavy text-center text-white mb-12" data-aos="fade-down">أسئلة شائعة</h3>
+    <div class="space-y-4">
+      <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-6 hover:border-indigo-500/30 transition" data-aos="fade-up">
+        <h4 class="font-bold text-white mb-3 flex items-center gap-2">
+          <i data-lucide="wifi-off" class="w-5 text-emerald-400"></i> هل يعمل بدون إنترنت؟
+        </h4>
+        <p class="text-slate-400 text-sm leading-relaxed">نعم، التطبيق مصمم ليعمل <strong class="text-white">أوفلاين 100٪</strong> داخل الصف. الإنترنت مطلوب فقط لإرسال رسائل واتساب.</p>
+      </div>
+      <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-6 hover:border-indigo-500/30 transition" data-aos="fade-up" data-aos-delay="100">
+        <h4 class="font-bold text-white mb-3 flex items-center gap-2">
+          <i data-lucide="shield-check" class="w-5 text-indigo-400"></i> هل بياناتي آمنة؟
+        </h4>
+        <p class="text-slate-400 text-sm leading-relaxed">بياناتك محفوظة محلياً على جهازك فقط. يمكنك أخذ <strong class="text-white">نسخة احتياطية</strong> كاملة من الإعدادات في أي وقت.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     MOBILE BOTTOM NAV
+═══════════════════════════════════ -->
+<div class="lg:hidden fixed bottom-0 w-full bg-slate-950/95 backdrop-blur-xl border-t border-slate-800 z-50 flex justify-around py-3 pb-safe shadow-[0_-10px_40px_rgba(0,0,0,.4)]">
+  <a href="#dashboard" class="flex flex-col items-center gap-1 text-slate-500 hover:text-indigo-400 transition">
+    <i data-lucide="home" class="w-5 h-5"></i><span class="text-[9px] font-bold">الداش</span>
+  </a>
+  <a href="#attendance" class="flex flex-col items-center gap-1 text-slate-500 hover:text-emerald-400 transition">
+    <i data-lucide="user-check" class="w-5 h-5"></i><span class="text-[9px] font-bold">الحضور</span>
+  </a>
+
+  <div class="relative -top-7">
+    <a href="#reports"
+       class="bg-amber-400 text-slate-900 w-14 h-14 rounded-full shadow-2xl flex items-center justify-center border-4 border-slate-950 transition hover:scale-110"
+       style="box-shadow: 0 0 0 1px rgba(245,158,11,.22), 0 0 40px rgba(245,158,11,.25);">
+      <i data-lucide="printer" class="w-6 h-6"></i>
+    </a>
+  </div>
+
+  <a href="#grades" class="flex flex-col items-center gap-1 text-slate-500 hover:text-blue-400 transition">
+    <i data-lucide="calculator" class="w-5 h-5"></i><span class="text-[9px] font-bold">الدرجات</span>
+  </a>
+  <a href="#knights" class="flex flex-col items-center gap-1 text-slate-500 hover:text-amber-400 transition">
+    <i data-lucide="crown" class="w-5 h-5"></i><span class="text-[9px] font-bold">الفرسان</span>
+  </a>
+</div>
+
+<!-- Back to top -->
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+  class="fixed bottom-24 left-6 bg-indigo-600 text-white p-3 rounded-full shadow-2xl shadow-indigo-700/50
+         translate-y-20 opacity-0 transition-all duration-500 z-40 hover:bg-indigo-500 hover:-translate-y-1 lg:bottom-10">
+  <i data-lucide="arrow-up" class="w-5 h-5"></i>
+</button>
+
+<!-- ═══════════════════════════════════
+     FOOTER
+═══════════════════════════════════ -->
+<footer class="bg-slate-950 border-t border-slate-900 py-12 pb-24 lg:pb-12 relative">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+
+      <!-- Footer Brand (ICON IMG) -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl overflow-hidden border border-slate-800 bg-slate-900">
+          <img src="icon-1.jpg" alt="أيقونة راصد" class="w-full h-full object-cover" />
+        </div>
+        <div>
+          <span class="text-lg font-heavy text-white block leading-none">راصد</span>
+          <span class="text-xs text-slate-600 font-bold">التطبيق الشامل </span>
+        </div>
+      </div>
+
+      <p class="text-slate-600 text-sm font-bold text-center">دليل الاستخدام © <span id="yr"></span> — جميع الحقوق محفوظة</p>
+
+      <div class="flex gap-3 flex-wrap justify-center">
+        <a href="#dashboard"  class="text-xs text-slate-600 hover:text-slate-400 font-bold transition">الداش</a>
+        <a href="#attendance" class="text-xs text-slate-600 hover:text-slate-400 font-bold transition">الحضور والغياب</a>
+        <a href="#students"   class="text-xs text-slate-600 hover:text-slate-400 font-bold transition">الطلاب</a>
+        <a href="#grades"     class="text-xs text-slate-600 hover:text-slate-400 font-bold transition">الدرجات</a>
+        <a href="#knights"    class="text-xs text-slate-600 hover:text-slate-400 font-bold transition">الفرسان</a>
+        <a href="#reports"    class="text-xs text-slate-600 hover:text-slate-400 font-bold transition">التقارير</a>
+        <a href="#settings"   class="text-xs text-slate-600 hover:text-slate-400 font-bold transition">الإعدادات</a>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  // Lucide icons
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+  } else {
+    document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+  }
+
+  // AOS
+  AOS.init({ once: true, offset: 60, duration: 750 });
+
+  // Year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Back to top
+  const btn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('translate-y-20', window.scrollY < 500);
+    btn.classList.toggle('opacity-0', window.scrollY < 500);
+  });
+
+  // Video player (toggle play/pause + overlay behavior)
+  function playVideo(wrapper) {
+    const video = wrapper.querySelector('video');
+    const overlay = wrapper.querySelector('.vid-overlay');
+    if (!video || !overlay) return;
+
+    video.controls = true;
+
+    // Toggle pause
+    if (!video.paused && !video.ended) {
+      video.pause();
+      overlay.classList.remove('hidden-overlay');
+      return;
+    }
+
+    overlay.classList.add('hidden-overlay');
+    video.play().catch(() => { /* Autoplay blocked: controls are visible */ });
+
+    const onEnd = () => {
+      overlay.classList.remove('hidden-overlay');
+      video.controls = false;
+      video.currentTime = 0;
+      video.removeEventListener('ended', onEnd);
+    };
+    video.addEventListener('ended', onEnd);
+  }
+
+  // Active nav on scroll
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('section[id]');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -75% 0px' });
+  sections.forEach(s => navObserver.observe(s));
+
+  // Hamburger
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const isOpen = menu.style.maxHeight !== '0px' && menu.style.maxHeight !== '';
+    menu.style.maxHeight = isOpen ? '0' : menu.scrollHeight + 'px';
+    document.getElementById('hb1').style.transform = isOpen ? '' : 'rotate(45deg) translate(5px,5px)';
+    document.getElementById('hb2').style.opacity  = isOpen ? '1' : '0';
+    document.getElementById('hb3').style.transform = isOpen ? '' : 'rotate(-45deg) translate(5px,-5px)';
+  }
+  function closeMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.style.maxHeight = '0';
+    document.getElementById('hb1').style.transform = '';
+    document.getElementById('hb2').style.opacity  = '1';
+    document.getElementById('hb3').style.transform = '';
+  }
+  document.addEventListener('click', (e) => {
+    if (!document.getElementById('mainNav').contains(e.target)) closeMenu();
+  });
+
+  // Pause when scrolled out of view
+  document.querySelectorAll('.vid-wrap video').forEach(v => {
+    new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting && !v.paused) v.pause();
+    }, { threshold: 0.2 }).observe(v);
+  });
+</script>
 </body>
 </html>
